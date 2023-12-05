@@ -1,0 +1,16 @@
+# ecommerce-dashboard
+ 
+ ## .env SETUP
+```env
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY= ""
+CLERK_SECRET_KEY= ""
+
+NEXT_PUBLIC_CLERK_SIGN_IN_URL=/auth/sign-in
+NEXT_PUBLIC_CLERK_SIGN_UP_URL=/auth/sign-up
+NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL=/
+NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL=/
+
+NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME=""
+
+DATABASE_URL="mysql://username:passowrd@localhost:3306/database-name"
+```
