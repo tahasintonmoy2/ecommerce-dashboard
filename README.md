@@ -12,5 +12,5 @@ NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL=/
 
 NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME=""
 
-DATABASE_URL="mysql://username:passowrd@localhost:3306/database-name"
+DATABASE_URL=""
 ```

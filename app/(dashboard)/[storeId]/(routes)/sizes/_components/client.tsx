@@ -1,15 +1,14 @@
 "use client";
 
+import { ApiList } from "@/components/ui/api-list";
 import { Button } from "@/components/ui/button";
+import { DataTable } from "@/components/ui/data-table";
 import { Heading } from "@/components/ui/heading";
 import { Separator } from "@/components/ui/separator";
-import { ApiList } from "@/components/ui/api-list";
-import { Size } from "@prisma/client";
 import { Plus } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
 import React from "react";
 import { SizeColumn, columns } from "./columns";
-import { DataTable } from "@/components/ui/data-table";
 
 interface SizesClientProps {
   data: SizeColumn[];

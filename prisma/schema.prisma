@@ -21,6 +21,7 @@ model Store {
   colors Color[] @relation("StoreToColor")
   products Product[] @relation("StoreToProduct")
   orders Order[] @relation("StoreToOrder")
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt  
 }
@@ -32,6 +33,7 @@ model Billboard {
   label String
   imageURL String
   categories Category[]
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt  
 
@@ -60,6 +62,7 @@ model Size {
   products Product[]
   name String
   value String
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -73,6 +76,7 @@ model Color {
   products Product[]
   name String
   value String
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -95,6 +99,7 @@ model Product {
   color Color @relation(fields: [colorId], references: [id])
   images Image[]
   orderItems OrderItem[]
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -109,6 +114,7 @@ model Image{
   productId String
   product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
   url String
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -123,6 +129,7 @@ model Order {
   isPaid Boolean @default(false)
   phone String @default("")
   address String @default("")
+  
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
