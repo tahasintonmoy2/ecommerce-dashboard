@@ -1,34 +1,34 @@
 import React from "react";
-import {SizesClient} from "./_components/client";
+import { SizesClient } from "./_components/client";
 import { db } from "@/lib/db";
 import { SizeColumn } from "./_components/columns";
-import {format} from 'date-fns';
+import { format } from "date-fns";
 
-const Sizes = async({
+const Sizes = async ({ 
   params
 }: {
   params: { storeId: string }
 }) => {
   const sizes = await db.size.findMany({
-    where:{
-      storeId: params.storeId
+    where: {
+      storeId: params.storeId,
     },
-    orderBy:{
-      createdAt:'desc'
-    }
-  })
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
 
-  const formattedSizes:SizeColumn[] = sizes.map((item)=> ({
+  const formattedSizes: SizeColumn[] = sizes.map((item) => ({
     id: item.id,
     name: item.name,
     value: item.value,
-    createAt: format(item.createdAt, "MMMM do, yyyy")
-  }))
+    createAt: format(item.createdAt, "MMMM do, yyyy"),
+  }));
 
   return (
     <div className="flex-col">
       <div className="flex-1 space-y-4 p-8 pt-6">
-        <SizesClient data={formattedSizes}/>
+        <SizesClient data={formattedSizes} />
       </div>
     </div>
   );

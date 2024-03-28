@@ -1,11 +1,13 @@
-import {db} from "@/lib/db";
+import { db } from "@/lib/db";
 
 interface GraphData {
   name: string;
   total: number;
 }
 
-export const getGraphRevenue = async (storeId: string): Promise<GraphData[]> => {
+export const getGraphRevenue = async (
+  storeId: string
+): Promise<GraphData[]> => {
   const paidOrders = await db.order.findMany({
     where: {
       storeId,

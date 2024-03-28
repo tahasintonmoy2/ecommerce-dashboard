@@ -208,7 +208,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({
                       {...field}
                     />
                   </FormControl>
-                  <FormMessage className="dark:text-red-600"/>
+                  <FormMessage className="dark:text-red-600" />
                 </FormItem>
               )}
             />

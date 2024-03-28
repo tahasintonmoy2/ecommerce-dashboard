@@ -1,5 +1,5 @@
 "use client";
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { ColorColumn } from "./columns";
 import {
   DropdownMenu,
@@ -21,65 +21,72 @@ interface CellActionProps {
 }
 
 const CellAction: React.FC<CellActionProps> = ({
- data 
+  data
 }) => {
-    const router = useRouter()
-    const params = useParams()
+  const router = useRouter();
+  const params = useParams();
 
-    const [isLoading, setIsLoading] = useState(false);
-    const [isOpen, setIsOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
-    const onCopy = (id: string) => {
-        navigator.clipboard.writeText(id),
-        toast.success("Color ID Copy to clipboard")
+  const onCopy = (id: string) => {
+    navigator.clipboard.writeText(id),
+      toast.success("Color ID Copy to clipboard");
+  };
+
+  const onDelete = async () => {
+    try {
+      setIsLoading(true);
+      await axios.delete(`/api/${params.storeId}/colors/${data.id}`);
+      toast.success("Color deleted");
+      router.refresh();
+    } catch (error) {
+      toast.error(
+        "Make sure you removed all products and categories with this color first."
+      );
+    } finally {
+      setIsLoading(false);
+      setIsOpen(false);
     }
+  };
 
-    const onDelete = async () => {
-        try {
-          setIsLoading(true);
-          await axios.delete(`/api/${params.storeId}/colors/${data.id}`);
-          toast.success("Color deleted");
-          router.refresh();
-        } catch (error) {
-          toast.error("Make sure you removed all products and categories with this color first.");
-        } finally {
-          setIsLoading(false);
-          setIsOpen(false);
-        }
-      };
-    
   return (
     <>
-     <AlertDialogModal
+      <AlertDialogModal
         isOpen={isOpen}
-        onClose={()=> setIsOpen(false)}
+        onClose={() => setIsOpen(false)}
         onConfirm={onDelete}
         loading={isLoading}
-     />
-        <DropdownMenu>
+      />
+      <DropdownMenu>
         <DropdownMenuTrigger asChild>
-            <Button className="h-8 w-8 p-0 dark:bg-transparent dark:border-none dark:hover:bg-slate-800" variant='ghost'>
-                <span className="sr-only">Open menu</span>
-                <MoreHorizontal className="h-4 w-4"/>
-            </Button>
+          <Button
+            className="h-8 w-8 p-0 dark:bg-transparent dark:border-none dark:hover:bg-slate-800"
+            variant="ghost"
+          >
+            <span className="sr-only">Open menu</span>
+            <MoreHorizontal className="h-4 w-4" />
+          </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent>
-            <DropdownMenuLabel>Action</DropdownMenuLabel>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem onClick={()=> onCopy(data.id)}>
-                <Copy className="mr-2 h-4 w-4"/>
-                Copy Id
-            </DropdownMenuItem>
-            <DropdownMenuItem onClick={()=> router.push(`/${params.storeId}/colors/${data.id}`)}>
-                <Edit className="mr-2 h-4 w-4"/>
-                Update
-            </DropdownMenuItem>
-            <DropdownMenuItem onClick={()=> setIsOpen(true)}>
-                <Trash className="mr-2 h-4 w-4"/>
-                Delete
-            </DropdownMenuItem>
+          <DropdownMenuLabel>Action</DropdownMenuLabel>
+          <DropdownMenuSeparator />
+          <DropdownMenuItem onClick={() => onCopy(data.id)}>
+            <Copy className="mr-2 h-4 w-4" />
+            Copy Id
+          </DropdownMenuItem>
+          <DropdownMenuItem
+            onClick={() => router.push(`/${params.storeId}/colors/${data.id}`)}
+          >
+            <Edit className="mr-2 h-4 w-4" />
+            Update
+          </DropdownMenuItem>
+          <DropdownMenuItem onClick={() => setIsOpen(true)}>
+            <Trash className="mr-2 h-4 w-4" />
+            Delete
+          </DropdownMenuItem>
         </DropdownMenuContent>
-        </DropdownMenu>
+      </DropdownMenu>
     </>
   );
 };

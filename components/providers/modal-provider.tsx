@@ -1,25 +1,23 @@
-"use client"
+"use client";
 
 import { useState, useEffect } from "react";
 import { StoreModal } from "@/components/models/store-modal";
-import React from 'react'
-import { BillboardImageModal } from "@/components/models/billboard-image-modal";
+import React from "react";
 
 export const ModalProvider = () => {
-    const [isMounted, setIsMounted] = useState(false)
+  const [isMounted, setIsMounted] = useState(false);
 
-    useEffect(()=>{
-        setIsMounted(true)
-    },[])
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
-    if (!isMounted) {
-        return null;
-    }
+  if (!isMounted) {
+    return null;
+  }
 
   return (
     <>
-        <StoreModal />
-        <BillboardImageModal />
+      <StoreModal />
     </>
-  )
-}
+  );
+};

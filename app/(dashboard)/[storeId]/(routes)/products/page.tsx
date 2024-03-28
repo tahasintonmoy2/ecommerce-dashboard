@@ -2,29 +2,29 @@ import React from "react";
 import ProductClient from "./_components/client";
 import { db } from "@/lib/db";
 import { ProductColumn } from "./_components/columns";
-import {format} from 'date-fns';
-import {formatPrice} from "@/lib/utils";
+import { format } from "date-fns";
+import { formatPrice } from "@/lib/utils";
 
-const Products = async({
+const Products = async ({ 
   params
 }: {
   params: { storeId: string }
 }) => {
   const products = await db.product.findMany({
-    where:{
-      storeId: params.storeId
+    where: {
+      storeId: params.storeId,
     },
     include: {
       category: true,
       size: true,
-      color: true
+      color: true,
     },
-    orderBy:{
-      createdAt:'desc'
-    }
-  })
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
 
-  const formattedProduct:ProductColumn[] = products.map((item)=> ({
+  const formattedProduct: ProductColumn[] = products.map((item) => ({
     id: item.id,
     name: item.name,
     isFeatured: item.isFeatured,
@@ -33,13 +33,13 @@ const Products = async({
     category: item.category.name,
     size: item.size.name,
     color: item.color.value,
-    createAt: format(item.createdAt, "MMMM do, yyyy")
-  }))
+    createAt: format(item.createdAt, "MMMM do, yyyy"),
+  }));
 
   return (
     <div className="flex-col">
       <div className="flex-1 space-y-4 p-8 pt-6">
-        <ProductClient data={formattedProduct}/>
+        <ProductClient data={formattedProduct} />
       </div>
     </div>
   );

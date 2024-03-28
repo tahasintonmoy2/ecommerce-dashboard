@@ -1,13 +1,12 @@
-import { db } from "@/lib/db"
-
+import { db } from "@/lib/db";
 
 export const getStockCount = async (storeId: string) => {
-    const stockCount = await db.product.count({
-        where: {
-            storeId,
-            isArchived: false,
-        },
-    });
+  const stockCount = await db.product.count({
+    where: {
+      storeId,
+      isArchived: false,
+    },
+  });
 
-    return stockCount;
-}
+  return stockCount;
+};
